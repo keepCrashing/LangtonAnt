@@ -21,7 +21,7 @@ void setup(){
 
 }
 void draw(){
-  Playground playground = Playground.getInstance();
+  //Playground playground = Playground.getInstance();
   fill(255, 255, 255, 0);
   stroke(128);
   rect(0, 0, 1000, 1000);
@@ -44,7 +44,7 @@ void gui(){
   Group g1 = cp5.addGroup("ant")
   .setFont(createFont("arial",20))
                 .setBackgroundColor(color(0,0,0))
-                .setBackgroundHeight(200);
+                .setBackgroundHeight(300);
   cp5.addTextfield("rules").setPosition(10,20)
   .setSize(300,50)
   .setAutoClear(false)
@@ -56,6 +56,10 @@ void gui(){
   .setFont(createFont("arial",20))
   .setSize(300,50)
   .moveTo(g1);
+  cp5.addButton("clear").setPosition(10,160)
+  .setFont(createFont("arial",20))
+  .setSize(300,50)
+  .moveTo(g1);
   accordion = cp5.addAccordion("acc")
                   .setPosition(1000,0)
                   .setWidth(400)
@@ -63,8 +67,21 @@ void gui(){
   accordion.open(0);
 }
 void play(){
- //looping = !looping; 
  String strRule = cp5.get(Textfield.class, "rules").getText();
  ant = new Ant(100, 100);
  rule = new Rule(ant, strRule);
+}
+void pause(){
+  looping = !looping; 
+}
+void clear(){
+  background(255, 255, 255);
+  fill(255, 255, 255, 0);
+  stroke(128);
+  rect(0, 0, 1000, 1000);
+  Playground playground = Playground.getInstance();
+  playground.setWidth(WIDTH-400);
+  playground.setHeight(HEIGHT);
+  playground.init();
+  rule = null;
 }
